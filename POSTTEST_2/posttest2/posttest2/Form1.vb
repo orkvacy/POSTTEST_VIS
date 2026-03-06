@@ -20,7 +20,7 @@
             Return
         End If
 
-        If CariIndeksBuku(judulBaru) <> -1 Then
+        If findIdx(judulBaru) <> -1 Then
             lblText.ForeColor = Color.Red
             lblText.Text = "Buku ini sudah " & judulBaru & "' sudah ada"
             txtJudul.Clear()
@@ -50,7 +50,7 @@
         End If
 
 
-        Dim indeks As Integer = CariIndeksBuku(judulYangDihapus)
+        Dim indeks As Integer = findIdx(judulYangDihapus)
 
         If indeks <> -1 Then
             delBuku(indeks)
@@ -66,6 +66,34 @@
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        If e.RowIndex < 0 OrElse e.RowIndex >= totalBuku Then ' cek event
+            Return
+        End If
+        If e.ColumnIndex = 2 Then
+
+            Dim judul = DataGridView1.Rows(e.RowIndex).Cells(0).Value.ToString()
+
+            delBuku(e.RowIndex)
+            refresh()
+
+            lblText.ForeColor = Color.Green
+            lblText.Text = "Done, '" & judul & "' berhasil dihapus!"
+
+        End If
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim colAct As DataGridViewButtonColumn = DirectCast(DataGridView1.Columns(2), DataGridViewButtonColumn)
+        colAct.Text = "❌"
+        colAct.UseColumnTextForButtonValue = True
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
     End Sub
 End Class
