@@ -1,4 +1,6 @@
 ﻿Module ModuleDataBuku
+
+    'notes : redim preserve = untuk resize/adjust ukuran array tanpa menghapus data yang sudah ada
     Public Structure Buku
         Public Judul As String
         Public Genre As String

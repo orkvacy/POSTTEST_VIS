@@ -11,8 +11,8 @@
 
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        Dim judulBaru As String = txtJudul.Text
-        Dim genreBaru As String = txtGenre.Text
+        Dim judulBaru As String = txtJudul.Text.Trim()
+        Dim genreBaru As String = txtGenre.Text.Trim()
 
         If judulBaru = "" Or genreBaru = "" Then
             lblText.ForeColor = Color.Red
@@ -94,6 +94,10 @@
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
 
     End Sub
 End Class
