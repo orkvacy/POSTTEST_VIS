@@ -72,7 +72,7 @@ Partial Class FormPickExercise
         Me.txtSearch.Location = New System.Drawing.Point(15, 46)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(5)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.PlaceholderText = "🔍  Search exercise..."
+        Me.txtSearch.PlaceholderText = "Find exercise..."
         Me.txtSearch.SelectedText = ""
         Me.txtSearch.Size = New System.Drawing.Size(302, 36)
         Me.txtSearch.TabIndex = 1

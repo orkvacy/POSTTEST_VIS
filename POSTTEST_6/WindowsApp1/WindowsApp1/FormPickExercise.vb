@@ -6,12 +6,10 @@ Public Class FormPickExercise
     Public Property highlightExerciseId As Integer = 0
     Public Property execNameSelect As String = ""
 
-    Private _dtAll As DataTable
 
     Private Sub FormPickExercise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        _dtAll = DataModule.getExec()
         filterMuscle()
-        RefreshList("", "All")
+        refreshList("", "All")
     End Sub
 
     Private Sub filterMuscle()
@@ -22,14 +20,15 @@ Public Class FormPickExercise
 
     Private Sub refreshList(search As String, muscleFilter As String)
         lstExercises.Items.Clear()
-        For Each row As DataRow In _dtAll.Rows
+
+        Dim dtResult As DataTable = DataModule.searchExec(search, muscleFilter)
+
+        For Each row As DataRow In dtResult.Rows
+            Dim id As Integer = CInt(row("id"))
             Dim name As String = row("name").ToString()
             Dim muscle As String = row("muscle_group").ToString()
-            Dim matchSearch As Boolean = search = "" OrElse name.ToLower().Contains(search.ToLower())
-            Dim matchMuscle As Boolean = muscleFilter = "All" OrElse muscle = muscleFilter
-            If matchSearch AndAlso matchMuscle Then
-                lstExercises.Items.Add(New ExerciseItem(CInt(row("id")), name, muscle))
-            End If
+
+            lstExercises.Items.Add(New ExerciseItem(id, name, muscle))
         Next
     End Sub
 

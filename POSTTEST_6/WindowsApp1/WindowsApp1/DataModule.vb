@@ -309,4 +309,32 @@ Module DataModule
         End Try
     End Function
 
+    Public Function searchExec(searchKeyword As String, muscleFilter As String) As DataTable
+        Dim dt As New DataTable()
+        Try
+            Using conn As MySqlConnection = GetConnection()
+                Dim sql As String = "SELECT * FROM exercises WHERE name LIKE @search"
+
+                If muscleFilter <> "All" Then
+                    sql &= " AND muscle_group = @muscle"
+                End If
+
+                sql &= " ORDER BY name ASC"
+
+                Using da As New MySqlDataAdapter(sql, conn)
+                    da.SelectCommand.Parameters.AddWithValue("@search", "%" & searchKeyword & "%")
+
+                    If muscleFilter <> "All" Then
+                        da.SelectCommand.Parameters.AddWithValue("@muscle", muscleFilter)
+                    End If
+
+                    da.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Gagal mencari data exercise: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return dt
+    End Function
+
 End Module
