@@ -8,15 +8,13 @@ Public Class FormPickExercise
 
 
     Private Sub FormPickExercise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        filterMuscle()
-        refreshList("", "All")
+        If cmbFilter.Items.Count > 0 Then
+            cmbFilter.SelectedIndex = 0
+        End If
+        refreshList("", cmbFilter.SelectedItem.ToString())
     End Sub
 
-    Private Sub filterMuscle()
-        cmbFilter.Items.Clear()
-        cmbFilter.Items.Add("All")
-        cmbFilter.SelectedIndex = 0
-    End Sub
+
 
     Private Sub refreshList(search As String, muscleFilter As String)
         lstExercises.Items.Clear()
